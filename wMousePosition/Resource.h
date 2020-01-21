@@ -1,20 +1,15 @@
-//{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
 // Used by wMousePosition.rc
 
-#define IDS_APP_TITLE			103
+#define IDS_APP_TITLE		100
+#define IDC_WMOUSEPOSITION	101
+#define IDI_WMOUSEPOSITION	102
+#define IDS_RUNNING			103
+#define IDS_ERR_MAIN		104
+#define IDS_ERR_WND			105
+#define IDS_ERR_HOOK		106
 
-#define IDR_MAINFRAME			128
-#define IDD_WMOUSEPOSITION_DIALOG	102
-#define IDD_ABOUTBOX			103
-#define IDM_ABOUT				104
-#define IDM_EXIT				105
-#define IDI_WMOUSEPOSITION			107
-#define IDI_SMALL				108
-#define IDC_WMOUSEPOSITION			109
-#define IDC_MYICON				2
 #ifndef IDC_STATIC
-#define IDC_STATIC				-1
+#define IDC_STATIC			-1
 #endif
 // Next default values for new objects
 //
