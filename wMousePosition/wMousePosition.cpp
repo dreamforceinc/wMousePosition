@@ -140,12 +140,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	hSlider = CreateWindow(TRACKBAR_CLASS, NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | TBS_NOTICKS | TBS_TOOLTIPS | TBS_BOTH,
 						   offset + static1Width / 3 + offset, static2posY, static1Width / 3, ctrlHeight,
 						   hWnd, (HMENU)ID_SLIDER, hInstance, nullptr);
-	hStatic3 = CreateWindow(TEXT("STATIC"), TEXT("Alt + F4 for Exit"), WS_CHILD | SS_CENTER | SS_SUNKEN | WS_VISIBLE,
+	hStatic3 = CreateWindow(TEXT("STATIC"), TEXT("Alt + F4 for Exit"), WS_CHILD | SS_CENTER | SS_SUNKEN | SS_NOTIFY | WS_VISIBLE,
 							offset + 2 * (static1Width / 3) + 2 * offset, static2posY, static1Width / 3 - 2 * offset, ctrlHeight,
-							hWnd, NULL, hInstance, nullptr);
+							hWnd, (HMENU)235, hInstance, nullptr);
 	SendMessage(hStatic1, WM_SETFONT, (WPARAM)hFont, FALSE);
 	SendMessage(hStatic3, WM_SETFONT, (WPARAM)hFont, FALSE);
 	SendMessage(hSlider, TBM_SETRANGE, (WPARAM)TRUE, (LPARAM)MAKELONG(tbMin, tbMax));
+	SendMessage(hSlider, TBM_SETTIPSIDE, (WPARAM)TBTS_TOP, NULL);
 	SendMessage(hSlider, TBM_SETPOS, (WPARAM)TRUE, tbMax);
 
 	ShowWindow(hWnd, nCmdShow);
@@ -206,20 +207,20 @@ LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wParam, LPARAM lParam)
 	lpmhs = (MSLLHOOKSTRUCT*)lParam;
 	xPos = lpmhs->pt.x;
 	yPos = lpmhs->pt.y;
-
+	HWND pwin = NULL;
 	HWND win = WindowFromPoint(lpmhs->pt);
 	if (win)
 	{
-		HWND pwin = win;
-		while (TRUE)
+		pwin = win;
+		while (pwin)
 		{
 			pwin = GetParent(win);
 			if (pwin) win = pwin;
-			else break;
+			//else break;
 		}
-		GetWindowText(win, bufferWin, sizeof(bufferWin) - sizeof(TCHAR));
+		GetWindowText(win, bufferWin, _countof(bufferWin));
 	}
-	StringCchPrintf(bufferPt, sizeof(bufferPt) - sizeof(TCHAR), TEXT("%d, %d"), xPos, yPos);
+	StringCchPrintf(bufferPt, _countof(bufferPt), TEXT("%d, %d"), xPos, yPos);
 
 	return CallNextHookEx(NULL, nCode, wParam, lParam);
 }
