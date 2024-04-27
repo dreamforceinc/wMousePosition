@@ -8,7 +8,6 @@
 #define IDS_RUNNING                     103
 #define IDS_ERR_MAIN                    104
 #define IDS_ERR_WND                     105
-#define IDS_ERR_HOOK                    106
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
